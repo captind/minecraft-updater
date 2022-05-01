@@ -63,7 +63,7 @@ else {
     # Stopping the Minecraft server
     Write-Verbose -Message "There are difference in Online and Local versions"
     Write-Verbose -Message "Stopping the Minecraft service"
-    Stop-Service -Name "minecraft-server"
+    Stop-Service -Name "minecraft-server-fa"
 
     start-sleep -s 2
 
@@ -131,16 +131,16 @@ else {
 
 
     # Removing the old uncompressed server files
-    # Write-Verbose -Message "Remove uncompressed version of backup server"
-    # if(Test-Path "$($backup_folder).zip"){
-    #     Remove-Item -Path $backup_folder -Recurse -Force
-    #}
+    Write-Verbose -Message "Remove uncompressed version of backup server"
+    if(Test-Path "$($backup_folder).zip"){
+        Remove-Item -Path $backup_folder -Recurse -Force
+    }
 
 
     # Setting the new Server Script to be executable and starting the server
     Write-Verbose "Setting new server script to be executable"
     Write-Verbose -Message "Starting the server again"
-    Start-Service -Name "minecraft-server"
+    Start-Service -Name "minecraft-server-fa"
 
     # Sending Emails
     if($SendMail.IsPresent){
@@ -157,9 +157,9 @@ else {
 
 
     # Cleaning up downloaded files
-    #if(Test-Path "$WorkingDirectory\Downloads\bedrock-server.zip"){
-    #    Remove-Item -Path "$WorkingDirectory\Downloads\bedrock-server.zip" -Force
-    #}
+    if(Test-Path "$WorkingDirectory\Downloads\bedrock-server.zip"){
+        Remove-Item -Path "$WorkingDirectory\Downloads\bedrock-server.zip" -Force
+    }
 }
 
 # Stopping the log file
